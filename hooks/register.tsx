@@ -41,13 +41,8 @@ export const register: Register = on => {
     if (unpainted !== undefined) {
       $.ui.toast(unpainted)
     }
-    const set = await $.theme.set(LOOK)
-
-    // Say plainly when no attached app paints themes.
-    if (!set.isDrawn) {
-      $.ui.toast(`Pixel Cosmos not drawn: ${set.reason}`)
-      $.ui.status(`Pixel Cosmos off: ${set.reason}`)
-    }
+    // Terminals never draw themes, so stay quiet here; /pixel-cosmos reports the state.
+    await $.theme.set(LOOK)
 
     await $.command.register({
       name: 'pixel-cosmos',
