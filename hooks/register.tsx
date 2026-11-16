@@ -49,7 +49,22 @@ export const register: Register = on => {
       $.ui.status(`Pixel Cosmos off: ${set.reason}`)
     }
 
+    await $.command.register({
+      name: 'pixel-cosmos',
+      description: 'Re-apply the Pixel Cosmos theme and say whether this app draws it',
+    })
+
     return next(e)
+  })
+
+  on('command.run', { command: 'pixel-cosmos' }, async $ => {
+    const set = await $.theme.set(LOOK)
+
+    return {
+      text: set.isDrawn
+        ? 'Pixel Cosmos applied: an app that draws themes is attached. If you still see the plain look, update the Claude desktop app and restart it.'
+        : `Pixel Cosmos is not drawn here: ${set.reason}`,
+    }
   })
 
   on('ui.render', { component: 'Backdrop' }, ($, e, next) => {
