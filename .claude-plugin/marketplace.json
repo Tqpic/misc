@@ -1,0 +1,6 @@
+{
+  "name": "tqpic-misc",
+  "owner": { "name": "Tqpic" },
+  "description": "Misc Claude mods",
+  "plugins": [{ "name": "pixel-cosmos", "source": "./" }]
+}
